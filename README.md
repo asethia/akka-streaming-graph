@@ -1,2 +1,5 @@
 # akka-streaming-graph
-Sample code how to create graph to read multiple database source to support query SLA, or calling multiple REST services to merge results or take result which ever comes first
+This is program creates kafka stream from given topic and print them on console. <br/>
+
+The program also create HTTP listener port 8080 to demonstrate message insert into a TOPIC, so kafka stream can read same. The REST service endpoint will be http://localhost:8080/msg/create to post a string message; which will be sent to given topic.
+
