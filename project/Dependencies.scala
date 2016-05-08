@@ -14,7 +14,9 @@ object Dependencies {
 
   val akkaReactiveKafka= "com.softwaremill.reactivekafka" %% "reactive-kafka-core" % reactKafkaV
 
-  val basicDeps = Seq(akkaStream,
+  val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % scalaLoggingV
+
+  val basicDeps = Seq(scalaLogging,akkaStream,
                       akkaActor,akkaSlf4j,akkaReactiveKafka,akkaHttpSprayJson)
 
 }
