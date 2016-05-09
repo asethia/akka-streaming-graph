@@ -13,7 +13,8 @@ object Main extends App with ReactiveGraph with HttpServices{
   implicit  val system=ActorSystem("ReactiveSystem")
   implicit val materializer=ActorMaterializer()
 
-  val reactiveGraph=createKafkaGraph().run()
+  val reactiveGraph=createKafkaGraph.run()
+
 
   //start HTTP Server
   Http().bindAndHandle(routes, "localhost", 8080)

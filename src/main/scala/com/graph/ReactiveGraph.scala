@@ -39,8 +39,6 @@ trait ReactiveGraph {
     valueDeserializer = new StringDeserializer()
   )
 
-  //create publisher for
-  private val publisher: Publisher[StringConsumerRecord] = reactiveKafka.consume(consumerProps)
 
 
   /**
@@ -48,9 +46,12 @@ trait ReactiveGraph {
     *
     * @return
     */
-  def createKafkaGraph() = {
+  def createKafkaGraph = {
     import GraphDSL.Implicits._
     RunnableGraph.fromGraph(GraphDSL.create() { implicit builder =>
+
+      //create publisher for
+      val publisher: Publisher[StringConsumerRecord] = reactiveKafka.consume(consumerProps)
 
       //async parallel message
 
@@ -60,13 +61,14 @@ trait ReactiveGraph {
       //this can be sink to store information into database
       val sink = builder.add(Sink.foreach(println))
 
-      Source.fromPublisher(publisher) ~> flow ~> sink
+      Source.fromPublisher[StringConsumerRecord](publisher) ~> flow ~> sink
 
       ClosedShape
     })
   }
 
   private def processValidateMessage(msg: String) = {
+    import scala.concurrent.ExecutionContext.Implicits.global
     Future {
       //perform complex validation or processing
       StringMessage(msg)

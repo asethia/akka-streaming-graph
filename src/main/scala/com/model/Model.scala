@@ -14,5 +14,5 @@ object Model {
 
 trait MsgProtocol extends DefaultJsonProtocol with SprayJsonSupport {
 
-  val stringMessageFormat=jsonFormat1(StringMessage.apply)
+  implicit val stringMessageFormat=jsonFormat1(StringMessage.apply)
 }
