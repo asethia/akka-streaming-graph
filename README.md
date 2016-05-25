@@ -12,4 +12,6 @@ This is program creates kafka stream from given topic and print them on the cons
 The REST service endpoint will be http://localhost:8080/msg/create to post a string message; which will be sent to the given topic. The REST Service store messages into "test_demo_topic"; which is being read by kafka stream graph and print on console.
 
 
+The HTTP Server will start from Main.scala and reactive stream from ReactiveStreamMain.scala. You can post messages to HTTP service using CURL command:
 
+curl -H "Content-Type: application/json" -X POST -d '{"msg":"Test"}' http://localhost:8080/msg/create
