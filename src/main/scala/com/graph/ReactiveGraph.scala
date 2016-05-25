@@ -26,8 +26,6 @@ trait ReactiveGraph {
   //kafka configuration read from application.conf
   private val kafkaConfig = config.getConfig("kafka")
 
-  private val reactiveKafka = new ReactiveKafka()
-
   val consumerProps = ConsumerProperties(
 
     bootstrapServers = kafkaConfig.getString("servers"),
@@ -40,16 +38,21 @@ trait ReactiveGraph {
   )
 
 
-
   /**
     * create Kafka Graph
+    *
     *
     * @return
     */
   def createKafkaGraph = {
+
+    val reactiveKafka = new ReactiveKafka()
+
     import GraphDSL.Implicits._
+
     RunnableGraph.fromGraph(GraphDSL.create() { implicit builder =>
 
+      println(consumerProps)
       //create publisher for
       val publisher: Publisher[StringConsumerRecord] = reactiveKafka.consume(consumerProps)
 

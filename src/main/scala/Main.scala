@@ -1,8 +1,13 @@
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
+import akka.stream.scaladsl.{Sink, Source}
 import com.graph.ReactiveGraph
 import com.service.HttpServices
+import com.softwaremill.react.kafka.{ReactiveKafka, ProducerMessage, ConsumerProperties}
+import com.softwaremill.react.kafka.KafkaMessages.StringConsumerRecord
+import org.apache.kafka.common.serialization.StringDeserializer
+import org.reactivestreams.Publisher
 
 /**
   * This is main class to start HTTP Listener and Kafka Stream
@@ -18,5 +23,7 @@ object Main extends App with ReactiveGraph with HttpServices{
 
   //start HTTP Server
   Http().bindAndHandle(routes, "localhost", 8080)
+
+
 
 }
