@@ -3,7 +3,7 @@
 This sample code povides following functionalities:
  
 1. Akka HTTP REST Service
-2. Kafka Consumer to store messages into Kafka
+2. Store incoming REST service request to Kafka topic
 3. Akka Stream Graph - Kafka Producer to stream messages
 
 

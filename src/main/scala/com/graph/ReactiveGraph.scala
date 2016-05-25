@@ -52,12 +52,10 @@ trait ReactiveGraph {
 
     RunnableGraph.fromGraph(GraphDSL.create() { implicit builder =>
 
-      println(consumerProps)
       //create publisher for
       val publisher: Publisher[StringConsumerRecord] = reactiveKafka.consume(consumerProps)
 
       //async parallel message
-
       val flow = builder.add(Flow[StringConsumerRecord].mapAsync[StringMessage](parallelism = 10)(msg =>
         processValidateMessage(msg.value())))
 
